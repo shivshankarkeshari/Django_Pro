@@ -10,3 +10,10 @@ python manage.py createsuperuser
 #admin interface
 	from .models import Album
 	admin.site.register(Album)
+
+
+# related objects set
+album1.song_set.all()
+
+album1.song_set.create(file_type: " ", song_title: " ") 
+album1.song_set.count()
