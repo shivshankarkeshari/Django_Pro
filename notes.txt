@@ -1,0 +1,12 @@
+python manage.py startapp music
+python manage.py migrate #for conneting with database
+os.path.joib(BASE_DIR, "templates")
+python manage.py makemigrations music
+python manage.py sqlmigrate music 0001
+python manage.py migrate
+python manage.py shell
+	from music.models import Album, Song
+python manage.py createsuperuser 
+#admin interface
+	from .models import Album
+	admin.site.register(Album)
