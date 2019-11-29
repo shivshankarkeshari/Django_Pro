@@ -2,7 +2,7 @@
     <ul>
         {%for al in all_alb%}
         <li>
-            <a href="{% url 'details' al.id %}">
+            <a href="{% url 'music:details' al.id %}">
                 {{al.album_title}}
             </a>
         </li>
