@@ -1,7 +1,7 @@
-# from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from .models import Album
 from django.template import loader
+from django.shortcuts import render
 
 # Create your views here.
 def index(request):
@@ -13,8 +13,11 @@ def index(request):
     return HttpResponse(template.render(cotext, request))
 
 
-
-
 def details(request, album_id):
-    return HttpResponse("<h1> Details for Album Id: " + str(album_id) + "</h2>")
+    try:
+        alu= Album.objects.get(pk=album_id)
+    except Album.DoesNotExist:
+        raise Http404("_"*10)
+
+    return render(request, "music/details.html", {"alb": alu})
 
