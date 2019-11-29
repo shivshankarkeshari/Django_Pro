@@ -1,2 +1,13 @@
-{{ alb.artist}} - {{alb.album_title }}
-{{alb}}
+<!-- {{ alb.artist}} - {{alb.album_title }} -->
+<!-- {{alb}} -->
+
+<img src={{alb.album_logo}} >
+<h2> {{alb.album_title}} </h2>
+<h3> {{alb.artist}} </h3>
+
+<ul>{%for song in alb.song_set.all %}
+    <li>
+        {{song.song_title}} - {{song.file_type}}
+    </li>
+    {%endfor%}
+</ul>
