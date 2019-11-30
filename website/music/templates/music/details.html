@@ -1,13 +1,49 @@
 <!-- {{ alb.artist}} - {{alb.album_title }} -->
 <!-- {{alb}} -->
-
 <img src={{alb.album_logo}} >
 <h2> {{alb.album_title}} </h2>
 <h3> {{alb.artist}} </h3>
-
+<!-- 
 <ul>{%for song in alb.song_set.all %}
     <li>
         {{song.song_title}} - {{song.file_type}}
     </li>
     {%endfor%}
-</ul>
+</ul> -->
+
+{% if error_message %}
+<p>
+    <strong>
+        {{ error_message }}
+    </strong>
+</p>
+{% endif %}
+
+<!-- #action what url you want to sned  this data to -->
+<form action="{% url 'music:favorite' alb.id %}" method="POST">
+    {% csrf_token %}
+    {% for song in alb.song_set.all %}
+        <input type="radio" id="song{{ forloop.counter }}" name="song" value="{{ song.id }}" / >
+        <label for="song{{ forloop.counter }}">
+            {{ song.song_title }}
+            {% if song.is_favorite %}
+                 <img src="https://cdn1.iconfinder.com/data/icons/mini-solid-icons-vol-13/16/629-512.png" style="width:16px;height:16px;">
+            {% endif %}
+        </label><br>
+    {% endfor %}
+    <input type="submit" value="Submit!" >
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

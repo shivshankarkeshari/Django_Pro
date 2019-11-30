@@ -18,3 +18,20 @@ def details(request, album_id):
     alu = get_object_or_404(Album, pk = album_id)
     return render(request, "music/details.html", {"alb": alu})
 
+def favorite(request, album_id):
+    album = get_object_or_404(Album, pk = album_id)
+    try:
+        selected_song = album.song_set.get(pk=request.POST["song"])
+    except (KeyError, Song.DoesNotExist):
+        return render(request, "music/details.html",
+        {"alb": album,
+        'error_message': "You didn't"        
+        })
+    else:
+        selected_song.is_favorite = True
+        selected_song.save()
+        return render(request, "music/details.html", {"alb": album})
+
+
+
+
